@@ -1,5 +1,6 @@
 [main]
-EC2_INSTANCE_TAG = ${EC2_INSTANCE_TAG}
-RETENTION_DAYS   = ${RETENTION_DAYS}
+EC2_INSTANCE_TAG   = ${ec2_instance_tag}
+EC2_INSTANCE_VALUE = ${ec2_instance_value}
+RETENTION_DAYS     = ${retention_days}
 [regions]
-regionList = ${REGIONS}
+regionList = ${regions}

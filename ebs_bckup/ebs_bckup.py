@@ -14,6 +14,7 @@ def lambda_handler(event, context):
     regionsStrg = config.get('regions', 'regionList')
     regionsList = regionsStrg.split(',')
     EC2_INSTANCE_TAG = config.get('main', 'EC2_INSTANCE_TAG')
+    EC2_INSTANCE_VALUE = config.get('main', 'EC2_INSTANCE_VALUE')
     retention_days = config.getint('main', 'RETENTION_DAYS')
     for r in regionsList:
         aws_region = r
@@ -22,7 +23,7 @@ def lambda_handler(event, context):
         ec = boto3.client('ec2', region_name=aws_region)
         reservations = ec.describe_instances(
             Filters=[
-                {'Name': 'tag-value', 'Values': [EC2_INSTANCE_TAG]},
+                {'Name': 'tag:' + EC2_INSTANCE_TAG, 'Values': [EC2_INSTANCE_VALUE]},
             ]
         )['Reservations']
         instances = sum(
